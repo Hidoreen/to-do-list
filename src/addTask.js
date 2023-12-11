@@ -25,15 +25,28 @@ export default function addTask() {
       displayBar.appendChild(submitButton);
       displayBar.appendChild(cancelButton);
 
+      const storedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+      // Display stored tasks on the webpage
+      storedTasks.forEach((task) => {
+        const taskDiv = document.createElement('div');
+        taskDiv.classList.add('taskDiv');
+        taskDiv.textContent = task;
+        displayBar.insertBefore(taskDiv, userInput);
+      });
+
       // Submit Button Event
       submitButton.addEventListener('click', () => {
-        if (userInput.value === '') {
+        const taskContent = userInput.value.trim();
+        if (taskContent === '') {
           alert('Task cannot be empty');
         } else {
           const taskDiv = document.createElement('div');
           taskDiv.classList.add('taskDiv');
-          taskDiv.textContent = userInput.value;
-          displayBar.appendChild(taskDiv);
+          taskDiv.textContent = taskContent;
+          displayBar.insertBefore(taskDiv, userInput);
+
+          storedTasks.push(taskContent);
+          localStorage.setItem('tasks', JSON.stringify(storedTasks));
           userInput.value = '';
         }
       });
