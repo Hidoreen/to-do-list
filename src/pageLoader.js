@@ -1,6 +1,6 @@
-import addTask from './addTask';
+import addProject from './createProject';
 
 function pageLoader() {
-  addTask();
+  addProject();
 }
 export default pageLoader();
