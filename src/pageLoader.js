@@ -1,6 +1,6 @@
-import addProject from './createProject';
+import createProjects from "./createProject";
 
 function pageLoader() {
-  addProject();
+  createProjects();
 }
 export default pageLoader();
